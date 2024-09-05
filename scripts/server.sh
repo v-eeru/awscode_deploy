@@ -1,4 +1,5 @@
 #!/bin/bash
 
 echo "starting nginx"
-sudo systemctl start nginx
+sudo apt-get update -y
+sudo systemctl start -y nginx
