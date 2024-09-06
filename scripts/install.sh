@@ -1,3 +1,3 @@
 #!/bin/bash
-sudo apt update
-sudo apt-get install -y nginx
+ apt-get update
+ apt-get install -y nginx
