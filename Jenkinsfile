@@ -1,41 +1,39 @@
 pipeline {
     agent any
 
+    environment {
+        S3_BUCKET = 'awscode-deploy-artifacts'
+        ARTIFACTS_PATH = 'https://awscode-deploy-artifacts.s3.ap-south-1.amazonaws.com/artifacts/'
+        AWS_REGION = 'ap-south-1' // Adjust based on your region
+    }
+
     stages {
         stage('Build') {
             steps {
                 script {
                     echo 'Building...'
-                    // Include your build steps here if needed
+                    
+                    // Run install.sh
+                    sh 'scripts/install.sh'
+                    
+                    // Run server.sh
+                    sh 'scripts/server.sh'
+                    
+                    // Add your build steps here if needed
                 }
             }
         }
         
-        stage('Deploy to AWS') {
+        stage('Upload Artifacts to S3') {
             steps {
                 script {
-                    // Define CodeDeploy configuration here
-                    def deployApplication = {
-                        awsCodeDeploy(
-                            applicationName: 'your-application-name',
-                            deploymentGroupName: 'your-deployment-group-name',
-                            deploymentConfigName: 'CodeDeployDefault.AllAtOnce',
-                            description: 'Deploying application',
-                            region: 'us-west-2' // Adjust based on your region
-                        )
-                    }
-                    deployApplication()
+                    // Assuming your artifacts are in a specific directory
+                    echo 'Uploading artifacts to S3...'
+                    sh '''
+                        aws s3 cp ${ARTIFACTS_PATH} s3://${S3_BUCKET}/artifacts/ --recursive --region ${AWS_REGION}
+                    '''
                 }
             }
         }
-    }
 
-    post {
-        success {
-            echo 'Deployment successful!'
-        }
-        failure {
-            echo 'Deployment failed!'
-        }
-    }
-}
+    
