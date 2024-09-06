@@ -1,0 +1,47 @@
+.container{
+    max-width:400px;
+    margin:10vh auto 0 auto;
+    box-shadow:0px 0px 43px 16px  rgba(57, 67, 75, 0.6);
+   
+
+}
+.display{
+    height:100px;
+  padding:16px 8px;
+    line-height:70px;
+  background-image:url(one\ piece.crop.png);
+  font-size:45px;
+  background-blend-mode:overlay;
+  background-color:rgba(0,0,0,0.7);
+  color:white;
+  background-size:contain;
+  text-align:right;
+    
+}
+.buttons{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr 1fr;
+    border:0.1rem solid;
+
+   }
+   
+
+
+ .button{   
+    border:0.05rem solid;
+    line-height:100px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size:25px;
+    text-align:center;
+   
+}
+#equal{
+    background-color:aqua;
+    color:white;
+    border:pink solid;
+}
+.button:hover{
+    background-color:black;
+    color:white;
+    transition:0.5s ease-in-out;
+}
