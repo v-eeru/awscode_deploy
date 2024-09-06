@@ -5,7 +5,17 @@ phases:
   install:
     commands:
       - echo Installing Nginx
-      - sudo apt-get install nginx -y
+      - set -e
+
+      - echo 
+      - sudo apt-get update || { echo "Failed to update package lists"; exit 1; }
+
+      
+      - sudo apt-get install -y nginx || { echo "Failed to install Nginx"; exit 1; }
+
+      
+
+
   
   build:
     commands:
